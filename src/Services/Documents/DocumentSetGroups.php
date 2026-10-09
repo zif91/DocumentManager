@@ -163,6 +163,8 @@ class DocumentSetGroups extends DocumentCreate
             }
         }
 
+        $this->secureWebDocument($this->documentData['id']);
+        $this->secureMgrDocument($this->documentData['id']);
         $document->refresh();
 
         if ($this->events) {

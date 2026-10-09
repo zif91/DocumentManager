@@ -146,7 +146,7 @@ class DocumentDuplicate extends DocumentCreate
             ]);
         }
 
-        $document = \DocumentManager::create($documentArray);
+        $document = \DocumentManager::create($documentArray, $this->events, false);
 
         // get document groups of src
         $oldDocGroups = DocumentGroup::query()
@@ -182,7 +182,7 @@ class DocumentDuplicate extends DocumentCreate
                 'id' => $item->id,
                 'parent' => $document->getKey(),
                 'toplevel' => 1,
-            ]);
+            ], $this->events, false);
         }
 
         if ($this->cache) {

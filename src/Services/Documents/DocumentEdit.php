@@ -219,7 +219,7 @@ class DocumentEdit extends DocumentCreate
         // not in active parent = deleted child
         $parentDeleted = $this->documentData['parent'] > 0 && empty(SiteContent::find($this->documentData['parent']));
         if ($parentDeleted) {
-            $resourceArray['deleted'] = 1;
+            $this->documentData['deleted'] = 1;
         }
 
         // set publishedon and publishedby

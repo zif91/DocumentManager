@@ -206,7 +206,7 @@ class DocumentCreate implements DocumentServiceInterface
         }
 
         if (EvolutionCMS()->hasPermission('publish_document')) {
-            if (!isset($this->documentData['pub_date'])) {
+            if (empty($this->documentData['pub_date'])) {
                 $this->documentData['pub_date'] = 0;
             } else {
                 $this->documentData['pub_date'] = EvolutionCMS()->toTimeStamp($this->documentData['pub_date']);
@@ -218,7 +218,7 @@ class DocumentCreate implements DocumentServiceInterface
                 }
             }
 
-            if (!isset($this->documentData['unpub_date'])) {
+            if (empty($this->documentData['unpub_date'])) {
                 $this->documentData['unpub_date'] = 0;
             } else {
                 $this->documentData['unpub_date'] = EvolutionCMS()->toTimeStamp($this->documentData['unpub_date']);
@@ -335,7 +335,7 @@ class DocumentCreate implements DocumentServiceInterface
             );
 
         foreach ($tmplvars as $tmplvar) {
-            if (!isset($this->documentData[$tmplvar->name])) {
+            if (!array_key_exists($tmplvar->name, $this->documentData)) {
                 continue;
             }
             if (!is_null($this->documentData[$tmplvar->name]) && $this->documentData[$tmplvar->name] != $tmplvar->default_text) {
@@ -389,7 +389,7 @@ class DocumentCreate implements DocumentServiceInterface
         }
     }
 
-    public function secureWebDocument($docid = '', $context = 0)
+    public function secureWebDocument($docid = '', $context = 1)
     {
         $context = $context == 0 ? 0 : 1;
         $privateField = $context ? 'privateweb' : 'privatemgr';
