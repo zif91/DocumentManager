@@ -161,6 +161,10 @@ class DocumentDuplicate extends DocumentCreate
                 ->insert($oldDocGroup);
         }
 
+        $this->secureWebDocument($document->getKey());
+        $this->secureMgrDocument($document->getKey());
+        $document->refresh();
+
         if ($this->events) {
             // invoke OnDocDuplicate event
             EvolutionCMS()->invokeEvent('OnDocDuplicate', [
